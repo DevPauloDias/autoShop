@@ -16,7 +16,7 @@ const schema = z.object({
 
 type SchemaType = z.infer<typeof schema>;
 @Controller()
-export class User {
+export class CreateUserController {
   constructor(private readonly createUserUseCase: CreateUserUseCase) {}
 
   @Post('user')

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
 import { AuthUserUseCase } from 'src/aplication/use-cases/user/authenticate-use-case';
 import { z } from 'zod';
 
@@ -18,8 +18,14 @@ export class AuthenticateController {
 
     const res = await this.authUserUseCase.execute({ email, password });
 
-    if (!res) return null;
+    console.log('res controller--- ', res);
 
-    return HttpStatus.ACCEPTED;
+    if (!res) return new BadRequestException('Credenciais inválidas');
+
+    console.log('depois do return ');
+
+    return {
+      token: res,
+    };
   }
 }
