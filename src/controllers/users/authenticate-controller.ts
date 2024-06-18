@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
 import { AuthUserUseCase } from 'src/aplication/use-cases/user/authenticate-use-case';
 import { z } from 'zod';
 
@@ -20,7 +20,7 @@ export class AuthenticateController {
 
     console.log('res controller--- ', res);
 
-    if (!res) return new BadRequestException('Credenciais inválidas');
+    if (!res) return new UnauthorizedException('credenciais inválidas');
 
     console.log('depois do return ');
 

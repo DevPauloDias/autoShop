@@ -5,10 +5,11 @@ import { CreateUserController } from './users/create-user-controller';
 import { CreateUserUseCase } from 'src/aplication/use-cases/user/create-user-use-case';
 import { DataBaseModule } from 'src/model/prisma/database.module';
 import { AuthService } from 'src/services/auth.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [DataBaseModule],
   controllers: [AuthenticateController, CreateUserController],
-  providers: [AuthUserUseCase, CreateUserUseCase, AuthService],
+  providers: [AuthUserUseCase, CreateUserUseCase, AuthService, JwtService],
 })
 export class HttpModule {}

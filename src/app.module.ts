@@ -6,6 +6,7 @@ import { AuthService } from './services/auth.service';
 
 @Module({
   imports: [
+    HttpModule,
     ConfigModule.forRoot(),
     JwtModule.register({
       secret: process.env.SECRET,
@@ -13,7 +14,6 @@ import { AuthService } from './services/auth.service';
         expiresIn: parseInt(process.env.EXPIRES),
       },
     }),
-    HttpModule,
   ],
   controllers: [],
   providers: [AuthService],
