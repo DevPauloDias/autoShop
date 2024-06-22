@@ -18,11 +18,7 @@ export class AuthenticateController {
 
     const res = await this.authUserUseCase.execute({ email, password });
 
-    console.log('res controller--- ', res);
-
     if (!res) return new UnauthorizedException('credenciais inválidas');
-
-    console.log('depois do return ');
 
     return {
       token: res,

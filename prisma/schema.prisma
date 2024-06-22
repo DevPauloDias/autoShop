@@ -14,31 +14,39 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
+  id       String @id @default(uuid())
   name     String @db.VarChar(50)
   email    String @db.VarChar(50)
   password String @db.VarChar(200)
+
+  anouce Annoucement[]
 
   @@map("usuarios")
 }
 
 model Vehicle {
-  id    Int    @id() @default(autoincrement())
+  id    String @id() @default(uuid())
   model String
   brand String
-  year  String
+  year  Int
   color String
   km    Int
+
+  Anouce Annoucement[]
 
   @@map("veiculos")
 }
 
-model Match {
-  vehicleId Int      @id @default(autoincrement())
-  ownerId   Int
-  buyerId   Int
-  dateSend  DateTime
-  dateMatch DateTime
+model Annoucement {
+  id        String   @id @default(uuid())
+  idVehicle String
+  idOwner   String
+  createdAt DateTime
+  updatedAt DateTime
+  status    Boolean
 
-  @@map("propostas")
+  Owner   User    @relation(fields: [idOwner], references: [id])
+  Vehicle Vehicle @relation(fields: [idVehicle], references: [id])
+
+  @@map("anuncio")
 }

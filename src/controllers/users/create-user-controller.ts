@@ -2,7 +2,6 @@ import {
   BadRequestException,
   Body,
   Controller,
-  HttpStatus,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -29,7 +28,5 @@ export class CreateUserController {
     const res = await this.createUserUseCase.execute({ email, name, password });
 
     if (!res) return new BadRequestException();
-
-    return HttpStatus.ACCEPTED;
   }
 }

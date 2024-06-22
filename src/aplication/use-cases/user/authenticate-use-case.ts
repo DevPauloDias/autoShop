@@ -22,9 +22,13 @@ export class AuthUserUseCase {
 
     if (!isPasswordValid) return null;
 
-    const token = await this.authService.createToken(userExists.id);
-    console.log('token ---', token);
+    const payload = {
+      name: userExists.name,
+      sub: userExists.id,
+    };
 
-    return token;
+    const token = await this.authService.createToken(payload);
+
+    return { token };
   }
 }
